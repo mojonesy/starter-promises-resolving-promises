@@ -2,18 +2,18 @@ const { welcome, goodbye, tell } = require("../utils/fortune-teller");
 
 const question = "Will I have a nice evening?";
 const promise = welcome();
-const tellPromise = tell(question);
+const tellPromise = tell();
 
-tellPromise
-    .then((result) => {        //Returns the promise from tell()
-        console.log(question); //Logs the question
-        console.log(result);   //Logs the result of tell()
-    })
-    .catch((error) => {        //Returns the error from tell()
-        console.log(error);    //Logs the error from tell()
-    });
+// tellPromise
+//     .then((result) => {        //Returns the promise from tell()
+//         console.log(question); //Logs the question
+//         console.log(result);   //Logs the result of tell()
+//     })
+//     .catch((error) => {        //Returns the error from tell()
+//         console.log(error);    //Logs the error from tell()
+//     });
 
-
+/*
 welcome()
     .then(console.log)      // Logs the result of welcome()
     .then(goodbye)          // Returns the promise from goodbye()
@@ -37,3 +37,21 @@ welcome()
     .then(goodbye) // Returns promise from goodbye()
     .then(console.log) // Logs the result from goodbye()
     .catch(console.error); // Logs error only from goodbye()
+*/
+
+async function fullSession(question) {
+    try {
+        const welcomeMessage = await welcome();
+            console.log(welcomeMessage);
+        const fortune = await tell(question);
+            console.log(question);
+            console.log(fortune);
+        const bye = await goodbye();
+            console.log(bye);
+    }
+    catch (error) {
+        console.log(`${error}`);
+    }  
+}
+
+fullSession(question);
